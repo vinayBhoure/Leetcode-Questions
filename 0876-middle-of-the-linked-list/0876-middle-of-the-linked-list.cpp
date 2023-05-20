@@ -11,25 +11,54 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-     
-        ListNode* temp = head;
-        int l = 0;
         
-        while(temp != NULL)
-        {
-            temp = temp -> next;
-            l++;
-        }
+      // appraoch 1
+//         ListNode* temp = head;
+//         int l = 0;
         
-        ListNode* node = head;
-        int cnt = 0;
+//         while(temp != NULL)
+//         {
+//             temp = temp -> next;
+//             l++;
+//         }
         
-        while( cnt < l/2 )
-        {
-            node = node -> next;
-            cnt++;
-        }
+//         ListNode* node = head;
+//         int cnt = 0;
+        
+//         while( cnt < l/2 )
+//         {
+//             node = node -> next;
+//             cnt++;
+//         }
     
-        return node;
+//         return node;
+        
+        
+        // appraoch 2
+        
+        ListNode* slow = head;
+        ListNode* fast = head -> next;
+        
+        if(head == NULL || head -> next == NULL) return head;
+        
+        // when 2 node are present
+        if(head -> next -> next == NULL)
+        {
+            return head -> next;
+        }
+        
+        while(fast != NULL)
+        {
+            fast = fast->next;
+            if(fast != NULL)
+            {
+                fast = fast -> next;
+            }
+            
+            slow = slow -> next;
+        }
+        
+        return slow;
+        
     }
 };
