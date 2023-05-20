@@ -27,6 +27,18 @@ public:
         curr -> next = prev;
     }
     
+     ListNode* reverse1(ListNode* &head)
+    {
+        if(head == NULL || head->next == NULL) return head;
+            
+        ListNode* chotahead = reverse1(head->next);
+        head -> next -> next = head;
+        head->next = NULL;
+        
+        return chotahead;
+        
+        
+    }
     
     ListNode* reverseList(ListNode* head) {
         
@@ -48,11 +60,19 @@ public:
     
 //    ->APPROACH 2
         
-        ListNode* curr = head;
-        ListNode* prev = NULL;
-        reverse(head, curr, prev);
-        return head;
+        // ListNode* curr = head;
+        // ListNode* prev = NULL;
+        // reverse(head, curr, prev);
+        // return head;
+        
+         // approach 3
+    
+      return reverse1(head);
         
     }
+    
+   
+    
+    
   
 };
