@@ -10,8 +10,8 @@
  */
 class Solution {
 public:
-  /**  
-    ListNode* reverse(ListNode* head)
+    
+    ListNode* reverse(ListNode* &head)
     {
         if(head == NULL ) return NULL;
         
@@ -32,7 +32,7 @@ public:
         
         return prev;
     }
-    
+    /**
     bool isPalindrome(ListNode* head) {
         
         
@@ -52,8 +52,12 @@ public:
        }
         return true;  */
     
-   bool isPalindrome(ListNode* head){
-       ListNode* temp = head;
+ /**   bool approach1(ListNode* head)
+    {
+    if(head==NULL||head->next==NULL) return true;
+    
+    
+         ListNode* temp = head;
        vector<int> v;
        while(temp != NULL)
        {
@@ -69,6 +73,56 @@ public:
            }
        }
        return true;
+    } */
+    
+    bool approach2(ListNode* &head)
+    {
+        if(head==NULL||head->next==NULL) 
+        {
+            return true;
+        }
+        
+     
+        ListNode* slow = head;
+        ListNode* fast = head;
+        
+      while((fast->next != NULL) && (fast ->next -> next  != NULL))
+      {
+          fast = fast ->next -> next;
+              
+          slow = slow -> next;
+          
+      }
+        
+        
+        fast = head;
+        
+        slow->next = reverse(slow->next);
+        // move to the right half
+       slow = slow->next;
+        
+        while(slow != NULL)
+        {
+            if(fast->val != slow->val)
+            {
+                return false;
+            }
+            
+            fast = fast -> next;
+            slow = slow -> next;
+        }
+        return true; 
+        
+    }
+    
+
+        
+    
+   bool isPalindrome(ListNode* head){
+      
+       return approach2(head);
+       
+       
        
    }
     
