@@ -21,7 +21,7 @@ public:
         }
         return prev;
     }
-    void reorderList(ListNode* head) {
+    void solution1(ListNode* head) {
         ListNode* slow = head;
         ListNode* fast = head;
         while(fast->next != NULL && fast->next->next != NULL){
@@ -43,6 +43,28 @@ public:
             prev = tempPrev;
         }
          if (curr != NULL) 
+        curr->next = NULL;
+    }
+    
+    void reorderList(ListNode* head) {
+       stack<ListNode* > st;
+       ListNode* temp = head;
+        while(temp != NULL){
+            st.push(temp);
+            temp = temp->next;
+        }
+        int n = st.size()/2;
+        ListNode* curr = head;
+        while(n--){
+            auto topnode = st.top();
+            st.pop();
+            
+            ListNode* currNext = curr->next;
+            curr->next = topnode;
+            topnode->next = currNext;
+            
+            curr = currNext;
+        }
         curr->next = NULL;
     }
 };
