@@ -1,7 +1,7 @@
 class Solution {
 public:
-    string minRemoveToMakeValid(string s) {
-       int n = s.length();
+    string solution1(string s){
+        int n = s.length();
         
         unordered_set<int> toRemove;
         stack<int> st;
@@ -34,5 +34,28 @@ public:
         }
         
         return result;
+    }
+    string minRemoveToMakeValid(string s) {
+        int n = s.size();
+        int openCnt = 0;
+        int closeCnt = 0;
+        string ans = "";
+        for(int i=0; i<n; i++){
+            if(s[i] == ')' && openCnt == 0) continue;
+            if(s[i] == ')' && openCnt > 0) openCnt--;
+            if(s[i] == '(') openCnt++;
+            ans.push_back(s[i]);
+        }
+        string res = "";
+        if(ans.size() > 0){
+             for(int i=ans.size()-1; i>=0; i--){
+                if(ans[i] == '(' && closeCnt == 0) continue;
+                if(ans[i] == '(' && closeCnt > 0) closeCnt--;
+                if(ans[i] == ')') closeCnt++;
+                res.push_back(ans[i]);
+             }
+        }
+        reverse(res.begin(), res.end());
+        return res;
     }
 };
